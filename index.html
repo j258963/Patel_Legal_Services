@@ -1,13 +1,952 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaksh Patel Legal Services | Ontario Paralegal</title>
+    <style>
+        :root {
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --emerald-600: #059669;
+            --white: #ffffff;
+            
+            --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--slate-50);
+            color: var(--slate-900);
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--slate-200);
+            height: 5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--slate-900);
+        }
+
+        .logo-text-main {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .logo-text-sub {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--slate-500);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--slate-600);
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--slate-900);
+        }
+
+        .btn-consult {
+            background-color: var(--slate-900);
+            color: var(--white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-consult:hover {
+            background-color: var(--slate-800);
+        }
+
+        /* Hero */
+        .hero {
+            background-color: var(--slate-900);
+            color: var(--white);
+            padding: 5rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            max-width: 48rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--slate-300);
+            margin-bottom: 2.5rem;
+            max-width: 40rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-btns {
+                flex-direction: row;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--white);
+            color: var(--slate-900);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        /* Features Bar */
+        .features-bar {
+            background-color: var(--white);
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--slate-100);
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            background-color: var(--slate-100);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-text h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-family: var(--font-sans);
+        }
+
+        .feature-text p {
+            font-size: 0.875rem;
+            color: var(--slate-500);
+        }
+
+        /* About */
+        .about {
+            padding: 5rem 0;
+            background-color: var(--slate-50);
+        }
+
+        .about-grid {
+            display: grid;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 1.2fr;
+            }
+        }
+
+        .about-image {
+            aspect-ratio: 4/5;
+            background-color: var(--slate-800);
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            bottom: -1.5rem;
+            right: -1.5rem;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .about-image-overlay {
+                display: block;
+            }
+        }
+
+        .about-content span {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--slate-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            color: var(--slate-600);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Services */
+        .services {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .service-card {
+            background-color: var(--slate-50);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--slate-100);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            background-color: var(--white);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border-color: var(--slate-200);
+        }
+
+        .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: var(--slate-900);
+            color: var(--white);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--slate-700);
+            font-weight: 500;
+        }
+
+        .check-icon {
+            color: var(--emerald-600);
+            flex-shrink: 0;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            background-color: var(--slate-900);
+            color: var(--white);
+            padding: 5rem 0;
+        }
+
+        .why-grid {
+            display: grid;
+            gap: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .why-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .why-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .why-num {
+            width: 2rem;
+            height: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .why-text h4 {
+            font-size: 1.25rem;
+            font-family: var(--font-sans);
+            margin-bottom: 0.25rem;
+        }
+
+        .why-text p {
+            color: var(--slate-400);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .detail-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--slate-100);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-card {
+            background-color: var(--slate-50);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--slate-100);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--slate-200);
+            outline: none;
+            font-family: var(--font-sans);
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--slate-900);
+            box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--slate-900);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 1.125rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--slate-900);
+            color: var(--white);
+            padding: 5rem 0 2.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--slate-500);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-sans);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--slate-400);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2.5rem;
+        }
+
+        .disclaimer-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .disclaimer-box h5 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--slate-400);
+            margin-bottom: 0.75rem;
+            font-family: var(--font-sans);
+        }
+
+        .disclaimer-box p {
+            font-size: 0.75rem;
+            color: var(--slate-500);
+            line-height: 1.6;
+        }
+
+        .copyright {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            color: var(--slate-500);
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            .copyright {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--slate-900);
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#home" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                <div>
+                    <span class="logo-text-main">Jaksh Patel</span>
+                    <span class="logo-text-sub">Licensed Paralegal</span>
+                </div>
+            </a>
+
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#why-choose-us" class="nav-link">Why Choose Us</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="btn-consult">Book Consultation</a>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Expert Legal Representation for Ontario Residents.</h1>
+                    <p>Specializing in Landlord and Tenant Board matters and Small Claims Court disputes. Jaksh Patel provides professional, affordable, and results-driven legal services across Ontario.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+                        <a href="#services" class="btn-secondary">View Legal Services</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Bar -->
+        <section class="features-bar">
+            <div class="container features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3>LTB Matters</h3>
+                        <p>Evictions, rent arrears, and tenant rights disputes.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/><path d="M12 3v12"/><path d="m5 21 14-14"/></svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3>Small Claims</h3>
+                        <p>Debt recovery, contract disputes, and property damage.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3>Licensed & Insured</h3>
+                        <p>Professional representation you can trust.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container about-grid">
+                <div class="about-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                    <p style="color: #64748b; font-style: italic; margin-top: 1rem;">Jaksh Patel</p>
+                    <div class="about-image-overlay">
+                        <p style="font-size: 2.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem; font-style: italic;">"Results Matter."</p>
+                        <p style="font-size: 0.875rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Jaksh Patel, Licensed Paralegal</p>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <span>About the Firm</span>
+                    <h2>Dedicated to Protecting Your Rights.</h2>
+                    <p>Jaksh Patel is a licensed Ontario paralegal with a deep commitment to providing accessible and high-quality legal representation. Navigating the legal system can be overwhelming, especially when your home or financial stability is at stake.</p>
+                    <p>With extensive experience appearing before the Landlord and Tenant Board (LTB) and in Small Claims Court, Jaksh focuses on delivering strategic advice and vigorous advocacy. Our firm is built on the pillars of <strong>affordability, professionalism, and unwavering client support</strong>.</p>
+                    <p>Whether you are a landlord seeking to regain possession of your property, a tenant facing unfair treatment, or a business owner looking to recover outstanding debts, we provide the personalized attention your case deserves.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block;">Our Expertise</span>
+                    <h2>Comprehensive Legal Solutions</h2>
+                    <p style="color: #64748b;">We specialize in two core areas of Ontario law, ensuring our clients receive focused and expert representation.</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h3>Landlord & Tenant Board</h3>
+                        <p style="color: #64748b; margin-bottom: 2rem;">The Residential Tenancies Act is complex. We represent both landlords and tenants in all matters before the LTB, ensuring compliance and protecting your interests.</p>
+                        <ul class="service-list">
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Eviction Applications (N4, N5, N7, N12, N13)</li>
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Rent Arrears & Non-Payment Disputes</li>
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Tenant Rights & Maintenance Issues</li>
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Lease Terminations & Agreements</li>
+                        </ul>
+                        <a href="#contact" style="text-decoration: none; color: #0f172a; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">Consult on LTB Matter <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/><path d="M12 3v12"/><path d="m5 21 14-14"/></svg>
+                        </div>
+                        <h3>Small Claims Court</h3>
+                        <p style="color: #64748b; margin-bottom: 2rem;">For claims up to $35,000, we provide cost-effective legal services to help you recover what you are owed or defend against unjust claims.</p>
+                        <ul class="service-list">
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Debt Recovery & Collection</li>
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Breach of Contract Disputes</li>
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Property Damage Claims</li>
+                            <li><svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Drafting & Filing Claims/Defences</li>
+                        </ul>
+                        <a href="#contact" style="text-decoration: none; color: #0f172a; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">Consult on Small Claims <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose-us" class="why-us">
+            <div class="container why-grid">
+                <div>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block;">The Advantage</span>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Why Hire Jaksh Patel?</h2>
+                    <div class="why-list">
+                        <div class="why-item">
+                            <div class="why-num">1</div>
+                            <div class="why-text">
+                                <h4>Proven Track Record</h4>
+                                <p>Years of experience navigating the LTB and Small Claims Court with successful outcomes.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-num">2</div>
+                            <div class="why-text">
+                                <h4>Affordable Fixed Rates</h4>
+                                <p>Transparent pricing with no hidden fees. We offer competitive rates compared to traditional law firms.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-num">3</div>
+                            <div class="why-text">
+                                <h4>Personalized Strategy</h4>
+                                <p>Every case is unique. We build a custom legal strategy tailored to your specific goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <div style="text-align: center; margin-bottom: 2.5rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; font-style: italic;">"Jaksh saved my rental property from a non-paying tenant who had been there for 6 months. Professional and efficient."</h3>
+                        <p style="color: #94a3b8;">— Sarah M., Toronto Landlord</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div style="background-color: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                            <p style="font-size: 1.875rem; font-weight: 700; margin-bottom: 0.25rem;">98%</p>
+                            <p style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Success Rate</p>
+                        </div>
+                        <div style="background-color: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                            <p style="font-size: 1.875rem; font-weight: 700; margin-bottom: 0.25rem;">500+</p>
+                            <p style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Cases Handled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <span>Contact Us</span>
+                    <h2>Start Your Consultation Today.</h2>
+                    <p style="color: #64748b; font-size: 1.125rem; margin-bottom: 2.5rem;">Don't wait for legal issues to escalate. Contact us today for a confidential assessment of your matter.</p>
+                    
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div>
+                                <p style="font-size: 0.875rem; color: #64748b; font-weight: 500;">Call or Text</p>
+                                <p style="font-size: 1.25rem; font-weight: 700;">(416) 555-0198</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            </div>
+                            <div>
+                                <p style="font-size: 0.875rem; color: #64748b; font-weight: 500;">Email Address</p>
+                                <p style="font-size: 1.25rem; font-weight: 700;">jaksh@patellegal.ca</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <form onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="(416) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label>Description of Legal Issue</label>
+                            <textarea rows="4" placeholder="Briefly describe your situation..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div style="grid-column: span 1;">
+                    <div class="footer-logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                        <span style="font-size: 1.5rem; font-weight: 700;">Jaksh Patel Legal</span>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.875rem; max-width: 24rem;">Providing professional legal representation for Landlord and Tenant Board and Small Claims Court matters across Ontario. Licensed by the Law Society of Ontario.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="disclaimer-box">
+                    <h5>Legal Disclaimer</h5>
+                    <p>The information provided on this website is for general informational purposes only and does not constitute legal advice. Accessing or using this website does not create a paralegal-client relationship between you and Jaksh Patel. Legal matters are time-sensitive and complex; you should consult with a licensed legal professional regarding your specific situation. Past results are not indicative of future outcomes.</p>
+                </div>
+                <div class="copyright">
+                    <p>© 2026 Jaksh Patel Legal Services. All rights reserved.</p>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <span>LSO Licensed</span>
+                        <span>Insured</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>
 
